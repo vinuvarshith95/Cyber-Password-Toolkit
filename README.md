@@ -78,12 +78,12 @@ Hosted Live 👉 [https://cyber-password-toolkit.onrender.com/](https://cyber-pa
 
 
 
-## 👨‍💻 Author
+##  Author
 
 Made with ❤️ by **Vinu Varshith**
 
-- GitHub: [@yourusername](https://github.com/yourusername)
-- LinkedIn: [Your LinkedIn Profile](https://www.linkedin.com/in/yourprofile/)
+- GitHub: [vinuvarshith95](https://github.com/vinuvarshith95)
+- LinkedIn: [https://www.linkedin.com/in/yourprofile/](https://www.linkedin.com/in/vinuvarshithalagappan/)
 
 
 
