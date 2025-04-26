@@ -83,7 +83,7 @@ Hosted Live 👉 [https://cyber-password-toolkit.onrender.com/](https://cyber-pa
 Made with ❤️ by **Vinu Varshith**
 
 - GitHub: [vinuvarshith95](https://github.com/vinuvarshith95)
-- LinkedIn: [https://www.linkedin.com/in/yourprofile/](https://www.linkedin.com/in/vinuvarshithalagappan/)
+- LinkedIn: [vinuvarshithalagappan](https://www.linkedin.com/in/vinuvarshithalagappan/)
 
 
 
