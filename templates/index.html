@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cyber Password Toolkit </title>
+    <link rel="stylesheet" href="/static/style.css">
+    <style>
+        .tab-buttons {
+            margin-bottom: 20px;
+        }
+        .tab-buttons button {
+            margin: 0 10px;
+            background-color: #161b22;
+            color: #58a6ff;
+            border: 2px solid #58a6ff;
+        }
+        .tab-buttons button.active {
+            background-color: #58a6ff;
+            color: black;
+        }
+        .tab {
+            display: none;
+        }
+        .tab.active {
+            display: block;
+        }
+        input[type="password"] {
+            padding: 10px;
+            width: 260px;
+            margin-top: 10px;
+            font-family: monospace;
+        }
+    </style>
+    <script>
+        function switchTab(id) {
+            document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('.tab-buttons button').forEach(btn => btn.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            document.getElementById(id + "-btn").classList.add('active');
+        }
+
+        // Existing password generation logic
+        async function fetchPassword() {
+            const res = await fetch('/generate', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({})
+            });
+            const data = await res.json();
+            document.getElementById("output").innerText = data.password;
+            document.getElementById("length").innerText = `Length: ${data.length} characters`;
+            document.getElementById("cracktime").innerText = "Estimated Time to Crack: " + formatTime(data.length);
+            updateStrengthMeter(data.length);
+        }
+
+        function updateStrengthMeter(length) {
+            const meter = document.getElementById("strength");
+            if (length < 14) {
+                meter.style.backgroundColor = "red";
+                meter.innerText = "Weak";
+            } else if (length < 18) {
+                meter.style.backgroundColor = "orange";
+                meter.innerText = "Medium";
+            } else {
+                meter.style.backgroundColor = "green";
+                meter.innerText = "Strong";
+            }
+        }
+
+        function copyPassword() {
+            const password = document.getElementById("output").innerText;
+            navigator.clipboard.writeText(password);
+            alert("Password Copied to Clipboard! ✅");
+        }
+
+        function formatTime(length) {
+            const guessesPerSecond = 1e9;
+            const charsetSize = 72;
+            const timeToCrack = Math.pow(charsetSize, length) / guessesPerSecond;
+            const years = timeToCrack / (60 * 60 * 24 * 365);
+            if (years > 1e9) return "∞ (Too long)";
+            if (years < 1) return "< 1 year ";
+            return years.toFixed(1) + " years";
+        }
+
+        async function testPasswordStrength() {
+            const pwd = document.getElementById("inputPwd").value;
+
+            // Basic NIST checks
+            let nistMessage = "";
+            if (pwd.length < 8) {
+                nistMessage = " Password too short. NIST requires at least 8 characters.";
+            } else {
+                nistMessage = " Password meets NIST minimum requirements.";
+            }
+
+            // Show NIST check results
+            document.getElementById("score").innerText = "";
+            document.getElementById("feedback").innerText = nistMessage;
+
+            // Optional: Also calculate crack time (just for information)
+            const res = await fetch('/strength', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({ password: pwd })
+            });
+            const data = await res.json();
+            document.getElementById("estimated").innerText = "Estimated Time to Crack: " + data.crack_time;
+        }
+
+        function updateStrengthBar() {
+            const pwd = document.getElementById("inputPwd").value;
+            const strengthBar = document.getElementById("strength-bar");
+
+            if (pwd.length === 0) {
+                strengthBar.style.width = "0%";
+                strengthBar.style.backgroundColor = "red";
+            } else if (pwd.length < 8) {
+                strengthBar.style.width = "30%";
+                strengthBar.style.backgroundColor = "red";
+            } else if (pwd.length < 12) {
+                strengthBar.style.width = "60%";
+                strengthBar.style.backgroundColor = "orange";
+            } else {
+                strengthBar.style.width = "100%";
+                strengthBar.style.backgroundColor = "green";
+            }
+        }
+
+
+
+        function togglePasswordCheckbox() {
+            const pwdField = document.getElementById("inputPwd");
+            pwdField.type = pwdField.type === "password" ? "text" : "password";
+        }
+
+
+        window.onload = () => {
+            switchTab('generator');
+            fetchPassword();
+        };
+    </script>
+</head>
+<body>
+    <h1> Cyber Password Toolkit</h1>
+
+    <div class="tab-buttons">
+        <button id="generator-btn" onclick="switchTab('generator')"> Generator</button>
+        <button id="tester-btn" onclick="switchTab('tester')"> Strength Tester</button>
+    </div>
+
+    <!-- Generator Tab -->
+    <div id="generator" class="tab">
+        <div id="output">Loading...</div>
+        <div id="length"></div>
+        <div id="cracktime"></div>
+        <div id="strength"></div>
+        <div class="buttons">
+            <button onclick="fetchPassword()">Regenerate</button>
+            <button onclick="copyPassword()">Copy</button>
+        </div>
+    </div>
+
+    <!-- Strength Tester Tab -->
+    <div id="tester" class="tab">
+        <p>Enter your password below to evaluate its strength:</p>
+      
+        <!-- wrapper for input, checkbox and bar -->
+        <div style="margin-bottom: 20px; display: flex; flex-direction: column; align-items: center; gap: 10px;">
+      
+          <input type="password" id="inputPwd" placeholder="Enter a password"
+                 style="padding: 10px; width: 260px; font-family: monospace;"
+                 oninput="updateStrengthBar()">
+      
+          <label style="color: #ccc; font-size: 14px;">
+            <input type="checkbox" onchange="togglePasswordCheckbox()"> Show Password
+          </label>
+      
+          <!--  Centered strength bar -->
+          <div id="strength-bar-container"
+               style="width: 260px; height: 10px; background-color: #333; border-radius: 5px;">
+            <div id="strength-bar"
+                 style="height: 100%; width: 0%; background-color: red; border-radius: 5px; transition: width 0.5s, background-color 0.5s;">
+            </div>
+          </div>
+        </div>
+      
+        <button onclick="testPasswordStrength()" style="margin-top: 10px;">Test Strength</button>
+        <div id="score" style="margin-top: 10px;"></div>
+        <div id="feedback"></div>
+        <div id="estimated"></div>
+    </div>     
+    
+</body>
+</html>
