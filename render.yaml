@@ -1,0 +1,6 @@
+services:
+  - type: web
+    name: cyber-password-toolkit
+    env: python
+    buildCommand: ""
+    startCommand: "python app.py"
