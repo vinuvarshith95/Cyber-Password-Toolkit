@@ -8,13 +8,13 @@ Hosted Live 👉 [https://cyber-password-toolkit.onrender.com/](https://cyber-pa
 
 ##  Features
 
-- 🔐 **Password Generator**: Instantly generates secure passwords between 12–24 characters.
-- 🛡️ **Password Strength Tester**:
+-  **Password Generator**: Instantly generates secure passwords between 12–24 characters.
+-  **Password Strength Tester**:
   - Checks if password meets NIST minimum requirements (≥ 8 characters).
   - Displays estimated crack time for passwords.
   - Shows a **live updating strength bar** (Red → Orange → Green).
-- 👁️ **Show/Hide Password** option for better usability.
-- 🌐 **Fully hosted** on Render with HTTPS protection.
+-  **Show/Hide Password** option for better usability.
+-  **Fully hosted** on Render with HTTPS protection.
 
 
 ## 🛠 Built With
