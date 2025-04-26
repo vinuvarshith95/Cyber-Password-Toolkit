@@ -1,0 +1,81 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+
+body {
+    font-family: 'Share Tech Mono', monospace;
+    padding: 40px;
+    background-color: #0d1117;
+    color: #c9d1d9;
+    text-align: center;
+}
+
+h1 {
+    color: #58a6ff;
+    font-size: 32px;
+    margin-bottom: 25px;
+}
+
+.tab-buttons button {
+    margin: 0 10px;
+    background-color: #161b22;
+    color: #58a6ff;
+    border: 2px solid #58a6ff;
+    padding: 10px 20px;
+}
+
+.tab-buttons button.active {
+    background-color: #58a6ff;
+    color: black;
+}
+
+.tab {
+    display: none;
+}
+
+.tab.active {
+    display: block;
+}
+
+#output {
+    font-size: 24px;
+    font-weight: bold;
+    color: #39ff14;
+    background: #161b22;
+    padding: 16px 30px;
+    border-radius: 10px;
+    margin: 20px auto 10px;
+    display: inline-block;
+    border: 1px solid #39ff14;
+    box-shadow: 0 0 10px #39ff14;
+    min-width: 280px;
+    letter-spacing: 1px;
+}
+
+#length, #cracktime, #strength {
+    margin: 8px;
+    font-size: 16px;
+}
+
+#strength {
+    width: 180px;
+    margin: 12px auto;
+    padding: 6px 0;
+    border-radius: 5px;
+    text-align: center;
+    background-color: #30363d;
+}
+
+button {
+    margin: 10px 6px;
+    padding: 10px 22px;
+    background-color: #238636;
+    border: none;
+    border-radius: 6px;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover {
+    background-color: #2ea043;
+}
