@@ -47,9 +47,9 @@ def strength():
     if years > 1e9:
         crack_time = "∞ (Too long)"
     elif years < 1:
-        crack_time = "< 1 year 😬"
+        crack_time = "< 1 year"
     else:
-        crack_time = f"{years:.1f} years 🚀"
+        crack_time = f"{years:.1f} years"
 
     return jsonify(score=score, feedback=feedback, crack_time=crack_time)
 
