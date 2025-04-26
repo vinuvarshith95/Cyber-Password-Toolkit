@@ -64,7 +64,7 @@ Hosted Live 👉 [https://cyber-password-toolkit.onrender.com/](https://cyber-pa
 
 | Generator Page | Strength Tester Page |
 |:--------------:|:--------------------:|
-| ![Generator](static/screenshots/generator.png) | ![Tester](static/screenshots/tester.png) |
+| ![Generator](/screenshots/Screenshot 2025-04-26 132511.png) | ![Tester](/screenshots/Screenshot 2025-04-26 133328.png) |
 
 (*Optional - you can add real screenshots later!*)
 
